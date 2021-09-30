@@ -1,0 +1,11 @@
+version: '3'
+services:
+  express-api:
+    build:
+      dockerfile: ./docker/node/Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: express-api
+    volumes:
+       - ./:/src/app
+       - /src/app/node_modules
