@@ -48,7 +48,18 @@ const sequelize = new Sequelize('database', null, null, {
 const Aliens = sequelize.define('aliens', {
     firstName: { type: Sequelize.STRING },
     lastName: { type: Sequelize.STRING },
-    planetName: { type: Sequelize.STRING },
-})
+    planet: { type: Sequelize.STRING },
+});
+
+// Lodash create aliens in SQL database
+Aliens.sync({ force: true }).then(() => {
+    _.times(10, (i) => {
+        Aliens.create({
+            firstName: casual.first_name,
+            lastName: casual.last_name,
+            planet: casual.word
+        });
+    });
+});
 
 export { Friends, Aliens };
