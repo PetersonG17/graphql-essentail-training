@@ -8,8 +8,16 @@ const typeDefs = `
         lastName: String
         gender: Gender
         age: Int
+        language: String
         email: String
         contacts: [Contact]
+    }
+
+    type Alien {
+        id: ID
+        firstName: String
+        lastName: String
+        planet: String
     }
 
     type Contact {
@@ -33,6 +41,7 @@ const typeDefs = `
         lastName: String
         gender: Gender
         age: Int
+        language: String
         email: String
         contacts: [ContactInput]
     }

@@ -1,5 +1,13 @@
 version: '3'
+
+networks:
+    express-network:
+
+volumes:
+    express-volume:
+
 services:
+
   express-api:
     build:
       dockerfile: ./docker/node/Dockerfile
@@ -7,5 +15,20 @@ services:
       - "8080:8080"
     container_name: express-api
     volumes:
-       - ./:/src/app
-       - /src/app/node_modules
+      - ./:/src/app
+      - /src/app/node_modules
+    networks:
+      - express-network
+    depends_on:
+      - express-mongo
+
+  express-mongo:
+    image: mongo:5.0.3
+    container_name: express-mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - express-network
+    volumes:
+      - express-volume:/data/db
+    
